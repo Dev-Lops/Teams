@@ -16,7 +16,7 @@ export function NewGroup() {
 
         <Input placeholder="Nome do grupo" />
 
-        <Button title="Criar" />
+        < Button title="Criar" />
       </Content>
     </Container>
   )
