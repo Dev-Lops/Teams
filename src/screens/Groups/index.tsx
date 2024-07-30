@@ -6,17 +6,17 @@ import { useState } from 'react';
 import { FlatList } from 'react-native';
 
 export function Groups() {
-  const [teams, setTeams] = useState<string[]>(['Vale de Benção', 'Rua das guarubas', 'São josé operário'])
+  const [group, setGroup] = useState<string[]>(['Vale de Benção', 'Rua das guarubas', 'São josé operário'])
 
   return (
     <S.Container>
       <Header />
       <Highlight
-        title='Equipes'
-        subtitle='Forme sua equipe e divirta-se!' />
+        title='Grupos'
+        subtitle='Forme seu grupo e divirta-se!' />
 
       <FlatList
-        data={teams}
+        data={group}
         keyExtractor={item => item}
         renderItem={({ item }) =>
           <GroupCard
