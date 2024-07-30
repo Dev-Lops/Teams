@@ -5,6 +5,7 @@ import { GroupCard } from '@components/GroupCard';
 import { useState } from 'react';
 import { FlatList } from 'react-native';
 import { ListEmpty } from '@components/ListEmpty';
+import { Button } from '@components/Button';
 
 export function Groups() {
   const [group, setGroup] = useState<string[]>([])
@@ -29,6 +30,9 @@ export function Groups() {
           <ListEmpty message="Nenhum grupo cadastrado!"
           />
         }
+      />
+      <Button
+        title='Criar novo grupo'
       />
 
     </S.Container>
