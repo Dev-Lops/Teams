@@ -1,7 +1,7 @@
+import { Loading } from '@components/Loading';
 import { Roboto_400Regular, Roboto_700Bold, useFonts } from '@expo-google-fonts/roboto';
 import { Groups } from '@screens/Groups';
 import theme from '@theme/index';
-import { ActivityIndicator } from 'react-native';
 import { ThemeProvider } from 'styled-components';
 
 export default function App() {
@@ -12,7 +12,7 @@ export default function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      {fontsLoader ? <Groups /> : <ActivityIndicator />}
+      {!fontsLoader ? <Groups /> : <Loading />}
     </ThemeProvider>
   )
 }
