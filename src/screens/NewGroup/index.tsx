@@ -5,12 +5,15 @@ import { Button } from "@components/Button";
 import { TextInput } from "react-native";
 import { Input } from "@components/Input";
 import { useNavigation } from "@react-navigation/native";
+import { useState } from "react";
 
 export function NewGroup() {
+  const [group, setGroup] = useState('')
+
   const navigation = useNavigation()
 
-  const handleNewPlayer = () => {
-    navigation.navigate('players', { group: 'Vale' })
+  const handleNewGroup = () => {
+    navigation.navigate('players', { group })
   }
 
   return (
@@ -21,11 +24,14 @@ export function NewGroup() {
         <Icon />
         <Highlight title="Novo grupo" subtitle="Crie o grupo para adicionar as pessoas" />
 
-        <Input placeholder="Nome do grupo" />
+        <Input
+          placeholder="Nome do grupo"
+          onChangeText={setGroup}
+        />
 
         < Button
           title="Criar"
-        onPress={handleNewPlayer}
+          onPress={handleNewGroup}
         />
       </Content>
     </Container>
