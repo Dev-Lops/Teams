@@ -12,7 +12,7 @@ import { Button } from "@components/Button";
 
 export function Players() {
   const [team, setTeam] = useState('Time A')
-  const [players, setPlayers] = useState([])
+  const [players, setPlayers] = useState(['Anderson', 'Esther'])
 
   return (
     <Container>
