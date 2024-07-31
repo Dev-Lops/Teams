@@ -4,8 +4,15 @@ import { Highlight } from "@components/Highlight";
 import { Button } from "@components/Button";
 import { TextInput } from "react-native";
 import { Input } from "@components/Input";
+import { useNavigation } from "@react-navigation/native";
 
 export function NewGroup() {
+  const navigation = useNavigation()
+
+  const handleNewPlayer = () => {
+    navigation.navigate('players', { group: 'Vale' })
+  }
+
   return (
     <Container>
       <Header showBackButton />
@@ -16,7 +23,10 @@ export function NewGroup() {
 
         <Input placeholder="Nome do grupo" />
 
-        < Button title="Criar" />
+        < Button
+          title="Criar"
+        onPress={handleNewPlayer}
+        />
       </Content>
     </Container>
   )
