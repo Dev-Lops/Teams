@@ -6,9 +6,16 @@ import { useState } from 'react';
 import { FlatList } from 'react-native';
 import { ListEmpty } from '@components/ListEmpty';
 import { Button } from '@components/Button';
+import { useNavigation } from '@react-navigation/native';
+
 
 export function Groups() {
   const [group, setGroup] = useState([])
+  const navigation = useNavigation()
+
+  const handleNewGroup = () => {
+    navigation.navigate('new')
+  }
 
   return (
     <S.Container>
@@ -33,6 +40,7 @@ export function Groups() {
       />
       <Button
         title='Criar novo grupo'
+        onPress={handleNewGroup}
       />
 
     </S.Container>
