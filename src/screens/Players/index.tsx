@@ -1,5 +1,5 @@
-import { Alert, FlatList } from "react-native";
-import { useCallback, useState } from "react";
+import { Alert, FlatList, type TextInput } from "react-native";
+import { useCallback, useRef, useState } from "react";
 import { useFocusEffect, useRoute } from "@react-navigation/native";
 
 import { playerAddByGroup } from "@storage/player/playerAddByGroup";
@@ -30,6 +30,8 @@ export function Players() {
   const route = useRoute()
   const { group } = route.params as RouteParams
 
+  const newPlayerNameInputRef = useRef<TextInput>(null)
+
   async function handleAddNewPlayer() {
     if (newPlayerName.trim().length === 0) {
       return Alert.alert('Nova Pessoa', 'Informe o nome da pessoa para adicionar!')
@@ -40,6 +42,8 @@ export function Players() {
     }
     try {
       await playerAddByGroup(newPlayer, group)
+      newPlayerNameInputRef.current?.blur()
+      setNewPlayerName('')
       fetchPlayersByTeam()
     } catch (error) {
       if (error instanceof Error) {
@@ -55,6 +59,7 @@ export function Players() {
     try {
       const playersByTeam = await playerGetByGroupAndTeam(group, team)
       setPlayers(playersByTeam)
+
     } catch (error) {
       console.error(error)
       Alert.alert('Time', 'Não foi possivel caregar as pessoas!')
@@ -74,9 +79,13 @@ export function Players() {
         subtitle="Adcione as pessoas e separe os times" />
       <Form>
         <Input
+          inputRef={newPlayerNameInputRef}
           onChangeText={setNewPlayerName}
+          value={newPlayerName}
           placeholder="Nome da pessoa"
           autoCorrect={false}
+          onSubmitEditing={handleAddNewPlayer}
+          returnKeyType="done"
         />
         <ButtonIcon
           icon='add'
