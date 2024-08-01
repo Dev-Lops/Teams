@@ -15,6 +15,7 @@ import { Filter } from "@components/Filter";
 import { PlayerCard } from "@components/PlayerCard";
 import { ListEmpty } from "@components/ListEmpty";
 import { Button } from "@components/Button";
+import { playerRemoveBygroup } from "@storage/player/playerRemoveByGroup";
 
 
 
@@ -63,6 +64,16 @@ export function Players() {
     } catch (error) {
       console.error(error)
       Alert.alert('Time', 'Não foi possivel caregar as pessoas!')
+    }
+  }
+
+  async function handleRemovePlayer(playerName: string) {
+    try {
+      await playerRemoveBygroup(playerName, group);
+      fetchPlayersByTeam();
+    } catch (error) {
+      console.log(error)
+      Alert.alert('Remover Pessoa', 'Ocorreu um erro ao remover a pessoa!')
     }
   }
 
@@ -116,7 +127,7 @@ export function Players() {
         renderItem={({ item }) =>
           <PlayerCard
             name={item.name}
-            onRemove={() => { }}
+            onRemove={() => handleRemovePlayer(item.name)}
           />
         }
         ListEmptyComponent={() => (
